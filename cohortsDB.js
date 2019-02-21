@@ -1,3 +1,14 @@
+const db = require("./dbConfig.js");
+
+module.exports = {
+  get,
+  getById,
+  getStudents,
+  insert,
+  update,
+  remove
+};
+
 function insert(cohort) {
   return db("cohorts")
     .insert(cohort)
@@ -10,13 +21,13 @@ function get() {
   return db("cohorts");
 }
 
-function getByID(id) {
+function getById(id) {
   return db("cohorts")
     .where({ id })
     .first();
 }
 
-function get(id) {
+function getStudents(id) {
   return db("cohorts")
     .join("students", "cohorts.id", "students.cohort_id")
     .select("students.name")
